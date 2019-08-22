@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- 하단메뉴 -->
+	<div id="footer" th:fragment="footerFragment">
+		<footer class="footer">
+            <div class="container-fluid">
+            	<nav>
+                	<ul class="footer-menu">
+                    	<li>
+							<a href="/">
+							    Home
+							</a>
+                        </li>
+                        <li>
+                            <a href="http://www.ksmart.or.kr/">
+                                Company
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-center">
+                    	©
+                    <script>
+						document.write(new Date().getFullYear())
+					</script>
+                        <i class="nc-icon nc-tv-2"></i>
+                        <a href="http://www.ksmart.or.kr/">KSMART</a>
+                        <i class="nc-icon nc-mobile"></i>
+                        063-717-1008
+                    </p>
+                </nav>
+            </div>
+		</footer>
+	</div>
+</div>
+</html>

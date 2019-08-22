@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.ksmart.ksmart_layout1.mapper.BoardMapper">
+	<insert id="addBoard" parameterType="kr.or.ksmart.ksmart_layout1.vo.Board">
+		INSERT INTO board(
+			 board_pw
+			,board_title
+			,board_content
+			,board_user
+			,board_date
+		)VALUES(
+			 #{boardPw}
+			,#{boardTitle}
+			,#{boardContent}
+			,#{boardUser}
+			,curdate()
+		)
+	</insert>
+	<select id="boardList" resultType="kr.or.ksmart.ksmart_layout1.vo.Board">
+		SELECT
+			 board_no AS boardNo
+			,board_pw AS boardPw
+			,board_title AS boardTitle
+			,board_content AS boardContent
+			,board_user AS boardUser
+			,board_date AS boardDate
+		FROM board 
+		ORDER BY board_no DESC 
+		LIMIT #{startRow},#{rowPerPage}
+	</select>
+	<select id="boardSearch" parameterType="String" resultType="kr.or.ksmart.ksmart_layout1.vo.Board">
+		SELECT
+			 board_no AS boardNo
+			,board_pw AS boardPw
+			,board_title AS boardTitle
+			,board_content AS boardContent
+			,board_user AS boardUser
+			,board_date AS boardDate
+		FROM board 
+		ORDER BY board_no DESC 
+		LIMIT 0,10
+		
+	</select>
+	<select id="getBoardAllCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM board
+	</select>
+	<select id="boardUpNo" parameterType="int" resultType="kr.or.ksmart.ksmart_layout1.vo.Board">
+		SELECT
+			board_no 	  AS boardNo
+		   ,board_title   AS boardTitle
+		   ,board_content AS boardContent
+		   ,board_user 	  AS boardUser
+		   ,board_date	  AS boardDate
+		FROM board
+		WHERE board_no=#{boardNo}
+	</select>
+	<update id="boardUpd" parameterType="kr.or.ksmart.ksmart_layout1.vo.Board">
+		UPDATE board 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="boardTitle neq null and boardTitle neq ''.toString()">
+				board_title = #{boardTitle},
+			</if>
+			<if test="boardContent neq null and boardContent neq ''.toString()">
+				board_content = #{boardContent},
+			</if>
+		</trim>
+		WHERE 
+			board_no=#{boardNo} AND board_pw=#{boardPw}
+	</update>
+	<delete id="boardDel" parameterType="kr.or.ksmart.ksmart_layout1.vo.Board">
+		DELETE 
+		FROM board 
+		WHERE 
+			board_no=#{boardNo} 
+		AND board_pw=#{boardPw}
+	</delete>
+</mapper>

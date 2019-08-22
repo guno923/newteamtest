@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>로그인</title>
+</th:block>
+<th:block layout:fragment="customContents">
+<div class="row">
+	<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body" style="width:400px">
+					<h4>
+					<strong>로그인</strong>
+					</h4>
+					<hr>
+					<form action="/login" method="post">
+						아이디
+						<input type="text" class="form-control" name="memberId">
+						비밀번호
+						<input type="password" class="form-control" name="memberPw">
+						<br/>
+						<button type="submit" class="btn btn-primary">ksmart로그인</button>
+						
+						<label class="text-danger" th:if="${result ne null}" th:text="${result}"></label>
+					</form>
+				</div>
+			</div>
+		</div>
+	<div class="col-md-4"></div>
+</div>
+</th:block>
+</html>

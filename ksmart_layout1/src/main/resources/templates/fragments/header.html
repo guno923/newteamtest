@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- Begin Header -->
+<div class="main-panel" th:fragment="headerFragment">
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/goodsList"><i class="nc-icon nc-app">상품</i></a>&nbsp; &nbsp;
+                    <a class="navbar-brand" href="/boardList"><i class="nc-icon nc-bullet-list-67">게시판</i></a>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav ml-auto">
+                        	<li class="nav-item dropdown">
+		                        <th:block th:unless="${session.SID eq null}">
+									<a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    <span class="no-icon"><i class="nc-icon nc-circle-09"></i></span>
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+										<p><strong>ID:[[${session.SID}]]</strong></p>
+										<p><strong>NAME:[[${session.SNAME}]]</strong></p>
+										<p><strong>LEVEL:[[${session.SLEVEL}]]</strong></p>
+									    <div class="divider"></div>
+									    <a class="nav-link" th:href="@{/modifyMember(memberId=${session.SID})}">내 정보</a>
+									</div>
+		                        </th:block>
+	                        </li>
+                        	<li class="nav-item">
+		                        <th:block th:unless="${session.SID ne null}">
+									<a class="nav-link" href="/addMember">
+										<span class="no-icon">회원가입</span>
+									</a>
+								</th:block>
+							</li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/login}" th:if="${session.SID eq null}">
+                                    <span class="no-icon">로그인</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+	                            <th:block th:unless="${session.SID eq null}">
+									<a class="nav-link" th:href="@{/logout}">
+										<span class="no-icon">로그아웃</span>
+									</a> 		
+								</th:block>
+							</li>
+                        </ul>
+                    </div>
+            	</div>
+            </nav>
+	<!-- End Navbar -->
+	<!-- End Header -->
+</html>

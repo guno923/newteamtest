@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<th:block layout:fragment="customTitle">
+	<title>상품목록</title>
+</th:block>
+<th:block layout:fragment="customContents">
+	<h5>게시글 목록</h5>
+	<hr>
+	<form action="/boardList" method="post">
+		<select name="sk">
+			<option value="board_title">제목</option>
+			<option value="board_content">내용</option>
+			<option value="board_user">글쓴이</option>
+		</select>
+		<input type="text" name="sv">
+		<button type="submit">검색</button>
+	</form>
+	<hr>
+	<table width="100%" border="1">
+		<tr>
+			<td>no</td>
+			<td>제목</td>
+			<td>내용</td>
+			<td>글쓴이</td>
+			<td>등록일</td>
+			<th:block th:unless="${session.SID == null}">
+			<td>수정</td>
+			<td>삭제</td>
+			</th:block>
+		</tr>
+		<tr th:each="list:${boardList}">
+			<td th:text="${list.boardNo}"></td>
+			<td th:text="${list.boardTitle}"></td>
+			<td th:text="${#strings.abbreviate(list.boardContent,30)}"></td>
+			<td th:text="${list.boardUser}"></td>
+			<td th:text="${list.boardDate}"></td>
+			<th:block th:unless="${session.SID == null}">
+			<td>
+				<!-- /modifyMember?memberId="값"&memberPw="값" -->
+				<a th:href="@{/boardUpNo(boardNo=${list.boardNo})}">수정</a>
+			</td>
+			<td>
+				<a th:href="@{/boardDel(boardNo=${list.boardNo})}">삭제</a>
+			</td>
+			</th:block>
+		</tr>
+	</table><br/>
+	<!-- 맨처음 -->
+	<a th:href="@{/boardList}">[처음]</a>
+	<!-- 이전 -->
+	<a th:if="${currentPage > 1}" th:href="@{/boardList(currentPage=${currentPage - 1})}">[이전]</a>
+	<th:block th:each="num:${#numbers.sequence(startPageNum, lastPageNum)}">
+		<span th:if="${currentPage == num}"
+		th:text="${'['+num+']'}"></span>
+		<a th:unless="${currentPage == num}" th:text="${'['+num+']'}"
+		th:href="@{/boardList(currentPage=${num})}"></a>
+	</th:block>
+	<!-- 다음 -->
+	<a th:if="${currentPage < lastPage}" th:href="@{/boardList(currentPage=${currentPage + 1})}">[다음]</a>
+	<!-- 맨마지막 -->
+	<a th:href="@{/boardList(currentPage=${lastPage})}">[마지막]</a>
+</th:block>
+</html>

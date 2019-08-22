@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="sidebar" th:fragment="leftmenuFragment">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="/" class="simple-text">
+                        KSMART
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a class="nav-link" href="/memberList">
+                            <i class="nc-icon nc-badge"></i>
+                            <p>Member List</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/goodsList">
+                            <i class="nc-icon nc-app"></i>
+                            <p>Goods List</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/boardList">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Bulletin Board</p>
+                        </a>
+                    </li>
+                    <th:block th:unless="${session.SID == null}">
+	                    <li>
+	                        <a class="nav-link" href="/addGoods">
+	                            <i class="nc-icon nc-layers-3"></i>
+	                            <p>상품등록</p>
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a class="nav-link" href="/addBoard">
+	                            <i class="nc-icon nc-notes"></i>
+	                            <p>게시글 작성</p>
+	                        </a>
+	                    </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+	</div>
+</div>
+</html>

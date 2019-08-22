@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>회원가입</title>
+</th:block>
+<th:block layout:fragment="customContents">
+	<h3><strong>회원가입</strong></h3>
+	<hr>
+	<div class="row">
+		<div class="col-md-7">
+			<form action="/addMember" method="post">
+				<div class="card">
+					<div class="card-body">
+						아이디
+						<input type="text" class="form-control" name="memberId"><br/>
+						비밀번호
+						<input type="password" class="form-control" name="memberPw"><br/>
+						권한
+						<!-- <input type="text" name="memberLevel"> -->
+						<select name="memberLevel" class="custom-select">
+							<option value="판매자">판매자</option>
+							<option value="구매자">구매자</option>
+							<option value="관리자">관리자</option>
+						</select><br/><br/>
+						이름<input type="text" class="form-control" name="memberName"><br/>
+						이메일<input type="text" class="form-control" name="memberEmail"><br/>
+			
+						<button type="submit" class="btn btn-primary">회원가입</button>
+				
+						<label th:if="${result ne null}" th:text="${result}"></label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-4">
+    		<div class="card card-user">
+        		<div class="card-image">
+            	<img src="/img/cardback.jpg">
+       	 		</div>
+        	<div class="card-body">
+            	<div class="author">
+					<img class="avatar border-gray" src="/img/img_avatar1.png">
+                   	<h5 class="title">
+                   	이름<input type="text" class="form-control" name="cardName">
+                   	</h5>
+                	닉네임<input type="text" class="form-control" name="nickName">
+            	</div>
+            		자기 소개
+            		<div class="form-group">
+            			<textarea class="form-control" rows="5"></textarea>
+            		</div>
+        	</div>
+        		<hr>
+        		<div class="button-container mr-auto ml-auto">
+		            <button href="#" class="btn btn-simple btn-link btn-icon">
+		                <i class="fa fa-facebook-square"></i>
+		            </button>
+		            <button href="#" class="btn btn-simple btn-link btn-icon">
+		                <i class="fa fa-twitter"></i>
+		            </button>
+		            <button href="#" class="btn btn-simple btn-link btn-icon">
+		                <i class="fa fa-google-plus-square"></i>
+		            </button>
+        		</div>
+    		</div>
+		</div>
+	</div>
+</th:block>
+</html>

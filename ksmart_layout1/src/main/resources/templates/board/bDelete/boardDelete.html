@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>게시글삭제</title>
+</th:block>
+<th:block layout:fragment="customContents">
+	<h5>작성글 삭제</h5>
+	<hr>
+	<form action="/boardDel" method="post">
+		<table border="1">
+			<tr>
+				<td>번호</td>
+				<td>
+					<input type="text" name="boardNo" th:value="${boardD.boardNo}" readonly="readonly">
+				</td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td>
+					<input type="text" name="boardTitle" th:value="${boardD.boardTitle}" readonly="readonly">
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td>
+					<textarea rows="5" cols="22" name="boardContent" th:text="${boardD.boardContent}" readonly="readonly"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>글쓴이</td>
+				<td>
+					<input type="text" th:value="${boardD.boardUser}" readonly="readonly">
+					<input type="hidden" th:value="${session.SID}">
+				</td>
+			</tr>
+			<tr>
+				<td>등록일</td>
+				<td>
+					<input type="text" name="boardDate" th:value="${boardD.boardDate}" readonly="readonly">
+				</td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td>
+					<input type="text" name="boardPw">
+				</td>
+			</tr>
+			<tr style="text-align: center;">
+				<td colspan="2">
+					<button type="submit">게시글삭제</button>
+				</td>
+			</tr>
+		</table>
+		<label th:if="${result ne null}" th:text="${result}"></label>
+	</form>
+	
+</th:block>
+</html>

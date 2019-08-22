@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>회원목록</title>
+</th:block>
+<th:block layout:fragment="customContents">
+	<h5>회원목록</h5>
+	<hr>
+	<!-- 검색 -->
+	<form action="/memberList" method="post">
+		<select name="sk">
+			<option value="m_id">회원아이디</option>
+			<option value="m_name">회원명</option>
+		</select>
+		<input type="text" name="sv">
+		<button type="submit">검색</button>
+	</form>
+	<hr>
+	<table class="table table-Active table-hover" width="100%" border="1">
+		<thead class="thead-dark">
+			<tr>
+				<th>아이디</th>
+				<th>비밀번호</th>
+				<th>권한</th>
+				<th>이름</th>
+				<th>이메일</th>
+				<th:block th:unless="${session.SID == null}">
+				<th>수정</th>
+				<th>삭제</th>
+				</th:block>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="l : ${memberList}">
+				<td th:text="${l.memberId}"></td>
+				<td th:text="${l.memberPw}"></td>
+				<td th:text="${l.memberLevel}"></td>
+				<td th:text="${l.memberName}"></td>
+				<td th:text="${l.memberEmail}"></td>
+				<th:block th:unless="${session.SID == null}">
+				<td>
+					<!-- /modifyMember?memberId="값"&memberPw="값" -->
+					<a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a>
+				</td>
+				<td>
+					<a th:href="@{/delMember(memberId=${l.memberId})}">삭제</a>
+				</td>
+				</th:block>
+			</tr>
+		</tbody>
+	</table>
+</th:block>
+</html>
